@@ -51,7 +51,7 @@ module.exports = class ContainerService {
                         '"width": ' + CONVERT(NVARCHAR(10), width) + ',' +
                         '"height": ' + CONVERT(NVARCHAR(10), height) + ',' +
                         '"weight": ' + CONVERT(NVARCHAR(10), weight) + ',' +
-                        '"is_empty": ' + CONVERT(NVARCHAR(1), is_empty) + ',' +
+                        '"is_empty": ' + CASE WHEN is_empty = 1 THEN 'true' ELSE 'false' END + ',' +
                         '"receipt_date": "' + CONVERT(NVARCHAR(20), receipt_date, 120) + '"' +
                         '},'
                     FROM containers;
