@@ -11,7 +11,6 @@ CREATE TABLE containers (
 );
 
 
-
 CREATE TABLE operations (
     id UNIQUEIDENTIFIER PRIMARY KEY,
     container_id UNIQUEIDENTIFIER,

@@ -18,7 +18,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 
-
 ( async function() {
     const availableRestMethods = ['get', 'post', 'put', 'delete', 'patch'];
     try {

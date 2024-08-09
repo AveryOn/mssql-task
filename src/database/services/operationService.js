@@ -40,6 +40,10 @@ module.exports = class OperationService {
                     DECLARE @json_result NVARCHAR(MAX) = '[';
                     
                     SELECT @json_result += 
+                        CASE 
+                            WHEN LEN(@json_result) > 1 THEN ',' 
+                            ELSE '' 
+                        END + 
                         '{' +
                         '"id": "' + CONVERT(NVARCHAR(36), id) + '",' +
                         '"container_id": "' + CONVERT(NVARCHAR(36), @containerID) + '",' +
@@ -48,10 +52,11 @@ module.exports = class OperationService {
                         '"type": "' + type + '",' +
                         '"operator_fullname": "' + operator_fullname + '",' +
                         '"inspection_place": "' + inspection_place + '"' +
-                        '},'
+                        '}'
                     FROM operations
                     WHERE container_id = @containerID;
-                    SET @json_result = LEFT(@json_result, LEN(@json_result) - 1) + ']';
+                    
+                    SET @json_result = @json_result + ']';
                     SELECT @json_result AS json_result;
                 `);
             return result.recordset[0].json_result;
